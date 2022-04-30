@@ -1,0 +1,12 @@
+//
+//  Environment.xcconfig
+//  CurrencyConverterApp
+//
+//  Created by Nikhil Gupta on 30/04/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+IS_BASE_URL = http:\/\/data.fixer.io/api/
+IS_API_ACCESS_KEY = 413e2d18ce2c1d7b46e59f4658618690

@@ -16,6 +16,8 @@
 		91E20EFB281D44D500401AAB /* CurrencyConverterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E20EFA281D44D500401AAB /* CurrencyConverterAppTests.swift */; };
 		91E20F05281D44D500401AAB /* CurrencyConverterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E20F04281D44D500401AAB /* CurrencyConverterAppUITests.swift */; };
 		91E20F07281D44D500401AAB /* CurrencyConverterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E20F06281D44D500401AAB /* CurrencyConverterAppUITestsLaunchTests.swift */; };
+		91E20F1E281D4D2E00401AAB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E20F1D281D4D2E00401AAB /* BaseViewController.swift */; };
+		91E20F20281D4D6000401AAB /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E20F1F281D4D5F00401AAB /* NetworkManger.swift */; };
 		AB82B78099863ECC5AC2FEBE /* Pods_CurrencyConverterAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1C8D34B97821F8765696FC /* Pods_CurrencyConverterAppTests.framework */; };
 		ACC065D11C6BDC04DA9FD4D8 /* Pods_CurrencyConverterApp_CurrencyConverterAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBA69FBBE20EDC9363786A8 /* Pods_CurrencyConverterApp_CurrencyConverterAppUITests.framework */; };
 		CE5AC2D947BD2E1A896D070E /* Pods_CurrencyConverterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BAF6442EB78BCCF1BF28FB /* Pods_CurrencyConverterApp.framework */; };
@@ -58,6 +60,9 @@
 		91E20F00281D44D500401AAB /* CurrencyConverterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E20F04281D44D500401AAB /* CurrencyConverterAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterAppUITests.swift; sourceTree = "<group>"; };
 		91E20F06281D44D500401AAB /* CurrencyConverterAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		91E20F1D281D4D2E00401AAB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		91E20F1F281D4D5F00401AAB /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
+		91E20F21281D4DE200401AAB /* Environment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Environment.xcconfig; sourceTree = "<group>"; };
 		B2F1FB4E316F4CD023871ABD /* Pods-CurrencyConverterAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterAppTests.release.xcconfig"; path = "Target Support Files/Pods-CurrencyConverterAppTests/Pods-CurrencyConverterAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEAB79651259606827E7881D /* Pods-CurrencyConverterAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterAppTests.debug.xcconfig"; path = "Target Support Files/Pods-CurrencyConverterAppTests/Pods-CurrencyConverterAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FEBA69FBBE20EDC9363786A8 /* Pods_CurrencyConverterApp_CurrencyConverterAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyConverterApp_CurrencyConverterAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +131,10 @@
 		91E20EE2281D44D200401AAB /* CurrencyConverterApp */ = {
 			isa = PBXGroup;
 			children = (
+				91E20F1A281D4CD800401AAB /* HelperFiles */,
+				91E20F19281D4C9B00401AAB /* Controllers */,
+				91E20F18281D4C8A00401AAB /* ViewModel */,
+				91E20F17281D4C8100401AAB /* Model */,
 				91E20EE3281D44D200401AAB /* AppDelegate.swift */,
 				91E20EE5281D44D200401AAB /* SceneDelegate.swift */,
 				91E20EE7281D44D200401AAB /* ViewController.swift */,
@@ -133,6 +142,7 @@
 				91E20EEC281D44D500401AAB /* Assets.xcassets */,
 				91E20EEE281D44D500401AAB /* LaunchScreen.storyboard */,
 				91E20EF1281D44D500401AAB /* Info.plist */,
+				91E20F21281D4DE200401AAB /* Environment.xcconfig */,
 			);
 			path = CurrencyConverterApp;
 			sourceTree = "<group>";
@@ -154,6 +164,36 @@
 			path = CurrencyConverterAppUITests;
 			sourceTree = "<group>";
 		};
+		91E20F17281D4C8100401AAB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		91E20F18281D4C8A00401AAB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		91E20F19281D4C9B00401AAB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		91E20F1A281D4CD800401AAB /* HelperFiles */ = {
+			isa = PBXGroup;
+			children = (
+				91E20F1D281D4D2E00401AAB /* BaseViewController.swift */,
+				91E20F1F281D4D5F00401AAB /* NetworkManger.swift */,
+			);
+			path = HelperFiles;
+			sourceTree = "<group>";
+		};
 		AD435B0DDD3FA0CAED5069C5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +204,6 @@
 				BEAB79651259606827E7881D /* Pods-CurrencyConverterAppTests.debug.xcconfig */,
 				B2F1FB4E316F4CD023871ABD /* Pods-CurrencyConverterAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -407,7 +446,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E20F20281D4D6000401AAB /* NetworkManger.swift in Sources */,
 				91E20EE8281D44D200401AAB /* ViewController.swift in Sources */,
+				91E20F1E281D4D2E00401AAB /* BaseViewController.swift in Sources */,
 				91E20EE4281D44D200401AAB /* AppDelegate.swift in Sources */,
 				91E20EE6281D44D200401AAB /* SceneDelegate.swift in Sources */,
 			);
@@ -467,6 +508,7 @@
 /* Begin XCBuildConfiguration section */
 		91E20F08281D44D500401AAB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91E20F21281D4DE200401AAB /* Environment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -528,6 +570,7 @@
 		};
 		91E20F09281D44D500401AAB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91E20F21281D4DE200401AAB /* Environment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
