@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  CurrencyConverterApp
+
+  Created by Nikhil Gupta on 01/05/22.
+  
+*/
+
+"DETAILS" = "Details";
+"INVALID_URL_ERROR_MESSAGE" = "Url is invalid";
+"NETWORK_ERROR_MESSAGE" = "Network is unavailable. Please try after some time.";
+"JSON_DECODING_ERROR_MESSAGE" = "Invalid Response received.";
+"GENERIC_ERROR_MESSAGE" = "Something unexpected occured.";
+"CURRENCY_CONVERTER_TITLE" = "Currency Converter";

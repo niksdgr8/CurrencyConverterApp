@@ -49,3 +49,20 @@ class BaseViewController: UIViewController {
     }
 }
 
+extension BaseViewController: ProgressLoadingViewable {}
+
+extension Reactive where Base: BaseViewController {
+    
+    /// Bindable sink for `startAnimating()`, `stopAnimating()` methods.
+    internal var isAnimating: Binder<Bool> {
+        return Binder(self.base, binding: { (vc, active) in
+            if active {
+                vc.startAnimating()
+            } else {
+                vc.stopAnimating()
+            }
+        })
+    }
+    
+}
+
