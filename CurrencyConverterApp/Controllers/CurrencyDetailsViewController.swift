@@ -66,7 +66,8 @@ class CurrencyDetailsViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         currencyDetailViewModel.error.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { error in
+            .subscribe(onNext: { [ weak self ]error in
+                guard let self = self else { return }
                 self.parseNetworkError(error: error)
                 
             }).disposed(by: disposeBag)

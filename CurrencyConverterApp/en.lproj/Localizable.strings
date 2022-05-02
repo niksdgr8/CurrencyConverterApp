@@ -13,3 +13,5 @@
 "GENERIC_ERROR_MESSAGE" = "Something unexpected occured.";
 "CURRENCY_CONVERTER_TITLE" = "Currency Converter";
 "LOADING_MESSAGE" = "Loading ...";
+"DONE_BUTTON_TITLE" = "Done";
+"CANCEL_BUTTON_TITLE" = "Cancel";

@@ -38,3 +38,8 @@ struct APIConstants {
     static let symbolsEndPoint = "symbols"
     static let latestEndPoint = "latest"
 }
+
+struct CellConstants {
+    static let historicalDataCell = "HistoricalDataTableViewCell";
+    static let otherCurrencyDataCell = "OtherCurrencyDataTableViewCell";
+}

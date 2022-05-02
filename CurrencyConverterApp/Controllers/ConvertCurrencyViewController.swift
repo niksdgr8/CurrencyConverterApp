@@ -38,8 +38,34 @@ class ConvertCurrencyViewController: BaseViewController {
         self.setupViewModelBindings()
         self.currencyConverterViewModel.getValidCurrencySymbols()
         
+        self.inputCurrencyTextField.inputAccessoryView = toolBar()
+
         fromTextField.tintColor = .white
 
+    }
+    
+    func toolBar() -> UIToolbar{
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("DONE_BUTTON_TITLE", comment: "Done"), style: .done, target: self, action: #selector(doneButtonPressed))
+        let cancelButton = UIBarButtonItem(title: NSLocalizedString("CANCEL_BUTTON_TITLE", comment: "Cancel"), style: .plain, target: self, action: #selector(cancelButtonPressed))
+        doneButton.tintColor = .white
+        cancelButton.tintColor = .white
+        toolBar.setItems([cancelButton, space, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.sizeToFit()
+        return toolBar
+    }
+    
+    @objc func doneButtonPressed(){
+        self.inputCurrencyTextField.endEditing(true)
+    }
+
+    @objc func cancelButtonPressed(){
+        self.inputCurrencyTextField.endEditing(true)
     }
     
     func setupViewModelBindings() {
@@ -60,37 +86,43 @@ class ConvertCurrencyViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         currencyConverterViewModel.convertedValue.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { value in
+            .subscribe(onNext: { [ weak self ] value in
+                guard let self = self else { return }
                 self.detailsButton.isEnabled = true
             })
             .disposed(by: disposeBag)
         
         currencyConverterViewModel.currencySymbols.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
             self.callCurrencyConversionAPI()
                 
             }).disposed(by: disposeBag)
         inputCurrencyTextField.rx.controlEvent([.editingDidEnd])
             .asObservable()
-            .subscribe(onNext:{
+            .subscribe(onNext:{ [weak self] in
+                guard let self = self else { return }
                 self.callCurrencyConversionAPI()
             }).disposed(by: disposeBag)
         
         currencyConverterViewModel.error.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { error in
+            .subscribe(onNext: { [weak self ] error in
+                guard let self = self else { return }
                 self.parseNetworkError(error: error)
                 
             }).disposed(by: disposeBag)
         
         fromTextField.rx.controlEvent([.editingDidEnd])
             .asObservable()
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 self.callCurrencyConversionAPI()
             }).disposed(by: disposeBag)
         
         toTextField.rx.controlEvent([.editingDidEnd])
             .asObservable()
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 self.callCurrencyConversionAPI()
             }).disposed(by: disposeBag)
         
