@@ -75,7 +75,8 @@ class CurrencyDetailsViewModel {
 
             case .success(let dta) :
                 if let rates = dta[StringConstants.ratesKey] as? [String: Double] {
-                    self.createData(toSymbols: toSymbol, ratesData: rates, fromSymbol: fromSymbol, valueToConvert: valueToConvert)
+                    let currencyDataModel = self.createOtherCurrencyData(toSymbols: toSymbol, ratesData: rates, fromSymbol: fromSymbol, valueToConvert: valueToConvert)
+                    self.currencyModel.onNext(currencyDataModel)
                 }
             }
             
@@ -83,7 +84,7 @@ class CurrencyDetailsViewModel {
 
     }
         
-    func createData(toSymbols:[String], ratesData:[String: Double], fromSymbol: String, valueToConvert: String) {
+    func createOtherCurrencyData(toSymbols:[String], ratesData:[String: Double], fromSymbol: String, valueToConvert: String) -> [CurrencyModel] {
         var model = [CurrencyModel]()
         for symbol in toSymbols {
             if let fromValue = ratesData[fromSymbol], let toValue = ratesData[symbol], let value = Double(valueToConvert) {
@@ -94,7 +95,8 @@ class CurrencyDetailsViewModel {
             
             
         }
-        self.currencyModel.onNext(model)
+        return model
+        
     }
     
     func convertCurrency(fromValue: Double, toValue:Double, valueToConvert: Double) -> String {
