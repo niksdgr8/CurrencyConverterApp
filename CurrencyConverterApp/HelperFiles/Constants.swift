@@ -28,6 +28,9 @@ struct StringConstants {
     static let symbolsKey = "symbols"
     static let ratesKey = "rates"
     static let baseKey = "base"
+    static let dateFormatString = "yyyy-MM-dd"
+    static let commaString = ","
+    static let accessKey = "access_key"
     
 }
 

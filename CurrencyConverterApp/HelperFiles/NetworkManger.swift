@@ -16,19 +16,19 @@ enum NetworkError: Error {
     
 }
 
-
-
 class NetworkManager {
     static let shared: NetworkManager = NetworkManager()
     
-    let baseURL: URL = URL(string: infoForKey("BaseUrl")!)!
-    static func infoForKey(_ key: String) -> String? {
+    private var baseURL: URL {
+            return URL(string: infoForKey("BaseUrl")!)!
+    }
+
+    public func infoForKey(_ key: String) -> String? {
             return (Bundle.main.infoDictionary?[key] as? String)?
                 .replacingOccurrences(of: "\\", with: "")
      }
     
     public func getDataResponse(urlString: String, queryItems: [String: String]? = nil, completionBlock: @escaping (Result<[String: Any], Error>) -> Void) {
-      //  let urlStr = "http://data.fixer.io/api/symbols?access_key=413e2d18ce2c1d7b46e59f4658618690"
         let URL = baseURL.appendingPathComponent(urlString)
         var urlComponents = URLComponents(url: URL, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = self.getQueryItems(queryItemDictionary: queryItems)
@@ -36,11 +36,7 @@ class NetworkManager {
             completionBlock(.failure(NetworkError.invalidURL(NSLocalizedString("INVALID_URL_ERROR", comment: "Invalid URL error"))))
             return
         }
-//        guard let url = URL(string: NetworkManager.baseURL) else {
-//               completionBlock(.failure(NetworkError.invalidURL))
-//               return
-//           }
-//
+        
            let task = URLSession.shared.dataTask(with: fullURL) { data, response, error in
                guard error == nil else {
                    completionBlock(.failure(NetworkError.internetError(NSLocalizedString("NETWORK_ERROR_MESSAGE", comment: "Network error"))))
@@ -77,7 +73,7 @@ class NetworkManager {
     
     private func getQueryItems(queryItemDictionary: [String: String]?) -> [URLQueryItem] {
         var items = [URLQueryItem]()
-        items.append(URLQueryItem(name: "access_key", value: NetworkManager.infoForKey("APIKey")!))
+        items.append(URLQueryItem(name: StringConstants.accessKey, value: self.infoForKey("APIKey")!))
         guard let itemDictionary = queryItemDictionary else {
             return items
         }

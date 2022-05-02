@@ -13,7 +13,7 @@ class OtherCurrencyDataTableViewCell: UITableViewCell {
     
     public var cellModel : CurrencyModel! {
         didSet {
-            self.titleLabel.text = cellModel.currencySymbol + StringConstants.emptySpaceString + cellModel.currencyValue
+            self.titleLabel.text = cellModel.currencySymbol + StringConstants.epsilonString + cellModel.currencyValue
         }
     }
     override func awakeFromNib() {

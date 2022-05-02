@@ -40,7 +40,7 @@ class ConvertCurrencyViewModel {
     func getConvertedCurrency(fromSymbol: String, toSymbol: String, valueToConvert: String) {
         var queryItemsDict = [String: String]()
         queryItemsDict[StringConstants.baseKey] = StringConstants.euroSymbol
-        queryItemsDict[StringConstants.symbolsKey] = fromSymbol + "," + toSymbol
+        queryItemsDict[StringConstants.symbolsKey] = fromSymbol + StringConstants.commaString + toSymbol
         self.loading.onNext(true)
         NetworkManager.shared.getDataResponse(urlString: APIConstants.latestEndPoint, queryItems: queryItemsDict, completionBlock: { [weak self] result in
             guard let self = self else { return }
@@ -54,7 +54,8 @@ class ConvertCurrencyViewModel {
             case .success(let dta) :
                 if let rates = dta[StringConstants.ratesKey] as? [String: Double] {
                     if let fromValue = rates[fromSymbol], let toValue = rates[toSymbol], let value = Double(valueToConvert) {
-                        self.convertCurrency(fromValue: fromValue, toValue: toValue, valueToConvert: value)
+                        let convertedString = self.convertCurrency(fromValue: fromValue, toValue: toValue, valueToConvert: value)
+                        self.convertedValue.onNext(convertedString)
                     }
                 }
             }
@@ -62,9 +63,9 @@ class ConvertCurrencyViewModel {
         })
     }
     
-    func convertCurrency(fromValue: Double, toValue:Double, valueToConvert: Double) {
+    func convertCurrency(fromValue: Double, toValue:Double, valueToConvert: Double) -> String {
          let convertValue = (toValue * valueToConvert) / fromValue
-        self.convertedValue.onNext(String(format: "%.3f", convertValue))
-       
+        return String(format: "%.3f", convertValue)
+        
     }
 }

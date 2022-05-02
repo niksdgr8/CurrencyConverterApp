@@ -18,11 +18,11 @@ class CurrencyDetailsViewModel {
     func getHistoricalCurrencyData(fromSymbol: String, toSymbol: String, valueToConvert: String, convertedLatestValue: String) {
         var queryItemsDict = [String: String]()
         queryItemsDict[StringConstants.baseKey] = StringConstants.euroSymbol
-        queryItemsDict[StringConstants.symbolsKey] = fromSymbol + "," + toSymbol
+        queryItemsDict[StringConstants.symbolsKey] = fromSymbol + StringConstants.commaString + toSymbol
         
         var historicalModel = [HistoricalDataModel]()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = StringConstants.dateFormatString
         let dateStr:String = dateFormatter.string(from: NSDate() as Date)
         historicalModel.append(HistoricalDataModel(fromCurrencySymbol: fromSymbol, fromCurrencyValue: valueToConvert, toCurrencySymobl: toSymbol, toCurrencyValue: convertedLatestValue, dateString: dateStr))
         
@@ -61,7 +61,7 @@ class CurrencyDetailsViewModel {
         queryItemsDict[StringConstants.baseKey] = StringConstants.euroSymbol
         var symbolData = fromSymbol
         for symbol in toSymbol {
-            symbolData += "," + symbol
+            symbolData += StringConstants.commaString + symbol
         }
         queryItemsDict[StringConstants.symbolsKey] = symbolData
       
@@ -106,11 +106,10 @@ class CurrencyDetailsViewModel {
     func getHistoricalDates() -> [String] {
         
         var datesData = [String]()
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = StringConstants.dateFormatString
         for  i in 0...1{
             let lastWeekDate = NSCalendar.current.date(byAdding: .day, value: -(1+i), to: NSDate() as Date)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateStr:String = dateFormatter.string(from: lastWeekDate!)
             datesData.append(dateStr)
         }
