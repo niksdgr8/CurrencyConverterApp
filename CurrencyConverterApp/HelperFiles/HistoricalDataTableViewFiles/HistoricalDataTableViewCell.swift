@@ -15,9 +15,9 @@ class HistoricalDataTableViewCell: UITableViewCell {
     
     public var cellModel : HistoricalDataModel! {
         didSet {
-            self.dateLabel.text = "On" + " " + cellModel.dateString
-            self.valueLabel.text = cellModel.fromCurrencyValue + " " + cellModel.fromCurrencySymbol + " -> " + cellModel.toCurrencyValue + " " + cellModel.toCurrencySymobl
-            //self.titleLabel.text = cellModel.currencySymbol + " -> " + cellModel.currencyValue
+            self.dateLabel.text = StringConstants.onKey + StringConstants.emptySpaceString + cellModel.dateString
+            self.valueLabel.text = cellModel.fromCurrencyValue + StringConstants.emptySpaceString + cellModel.fromCurrencySymbol + StringConstants.epsilonString + cellModel.toCurrencyValue + StringConstants.emptySpaceString + cellModel.toCurrencySymobl
+            
         }
     }
     override func awakeFromNib() {
@@ -32,8 +32,8 @@ class HistoricalDataTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        dateLabel.text = ""
-        valueLabel.text = ""
+        dateLabel.text = StringConstants.emptyString
+        valueLabel.text = StringConstants.emptyString
     }
 
 }

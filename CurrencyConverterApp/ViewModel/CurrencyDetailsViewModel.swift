@@ -17,8 +17,8 @@ class CurrencyDetailsViewModel {
     
     func getHistoricalCurrencyData(fromSymbol: String, toSymbol: String, valueToConvert: String, convertedLatestValue: String) {
         var queryItemsDict = [String: String]()
-        queryItemsDict["base"] = "EUR"
-        queryItemsDict["symbols"] = fromSymbol + "," + toSymbol
+        queryItemsDict[StringConstants.baseKey] = StringConstants.euroSymbol
+        queryItemsDict[StringConstants.symbolsKey] = fromSymbol + "," + toSymbol
         
         var historicalModel = [HistoricalDataModel]()
         let dateFormatter = DateFormatter()
@@ -40,10 +40,7 @@ class CurrencyDetailsViewModel {
                         self.error.onNext(error)
                     }
                 case .success(let dta) :
-                    print("success", dta)
-                  //  let json = (try? JSONSerialization.jsonObject(with: dta, options: [])) as? [String: AnyObject]
-                    print("Success Response: \(dta)")
-                    if let rates = dta["rates"] as? [String: Double] {
+                    if let rates = dta[StringConstants.ratesKey] as? [String: Double] {
                         if let fromValue = rates[fromSymbol], let toValue = rates[toSymbol], let value = Double(valueToConvert) {
                             let convertedValue = self.convertCurrency(fromValue: fromValue, toValue: toValue, valueToConvert: value)
                             historicalModel.append(HistoricalDataModel(fromCurrencySymbol: fromSymbol, fromCurrencyValue: valueToConvert, toCurrencySymobl: toSymbol, toCurrencyValue: convertedValue, dateString: dateString))
@@ -61,14 +58,14 @@ class CurrencyDetailsViewModel {
     
     func getConvertedCurrency(fromSymbol: String, toSymbol: [String], valueToConvert: String) {
         var queryItemsDict = [String: String]()
-        queryItemsDict["base"] = "EUR"
+        queryItemsDict[StringConstants.baseKey] = StringConstants.euroSymbol
         var symbolData = fromSymbol
         for symbol in toSymbol {
             symbolData += "," + symbol
         }
-        queryItemsDict["symbols"] = symbolData
+        queryItemsDict[StringConstants.symbolsKey] = symbolData
       
-        NetworkManager.shared.getDataResponse(urlString: "latest", queryItems: queryItemsDict, completionBlock: { [weak self] result in
+        NetworkManager.shared.getDataResponse(urlString: APIConstants.latestEndPoint, queryItems: queryItemsDict, completionBlock: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(let networkError):
@@ -77,14 +74,8 @@ class CurrencyDetailsViewModel {
                 }
 
             case .success(let dta) :
-                print("success", dta)
-              //  let json = (try? JSONSerialization.jsonObject(with: dta, options: [])) as? [String: AnyObject]
-                print("Success Response: \(dta)")
-                if let rates = dta["rates"] as? [String: Double] {
+                if let rates = dta[StringConstants.ratesKey] as? [String: Double] {
                     self.createData(toSymbols: toSymbol, ratesData: rates, fromSymbol: fromSymbol, valueToConvert: valueToConvert)
-//                    if let fromValue = rates[fromSymbol], let toValue = rates[toSymbol], let value = Double(valueToConvert) {
-//                        self.convertCurrency(fromValue: fromValue, toValue: toValue, valueToConvert: value)
-//                    }
                 }
             }
             
@@ -124,5 +115,9 @@ class CurrencyDetailsViewModel {
             datesData.append(dateStr)
         }
         return datesData
+    }
+    
+    func getPopularCurrencySymbols() -> [String] {
+        return [StringConstants.dollarSymbol, StringConstants.britishPoundSymbol, StringConstants.egyptPoundSymbol, StringConstants.euroSymbol, StringConstants.canadianDollarSymbol, StringConstants.indianRupeeSymbol, StringConstants.australianDollarSymbol, StringConstants.dollarSymbol, StringConstants.japaneseYenSymbol, StringConstants.chineseSymbol, StringConstants.qatarRiyalSymbol, StringConstants.uaeDirhamSymbol, StringConstants.swissFrancSymbol]
     }
 }

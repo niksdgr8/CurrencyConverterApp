@@ -13,7 +13,7 @@ class OtherCurrencyDataTableViewCell: UITableViewCell {
     
     public var cellModel : CurrencyModel! {
         didSet {
-            self.titleLabel.text = cellModel.currencySymbol + " -> " + cellModel.currencyValue
+            self.titleLabel.text = cellModel.currencySymbol + StringConstants.emptySpaceString + cellModel.currencyValue
         }
     }
     override func awakeFromNib() {
@@ -28,7 +28,7 @@ class OtherCurrencyDataTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        titleLabel.text = ""
+        titleLabel.text = StringConstants.emptyString
     }
 
 }

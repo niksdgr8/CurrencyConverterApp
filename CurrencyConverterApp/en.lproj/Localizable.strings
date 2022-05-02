@@ -12,3 +12,4 @@
 "JSON_DECODING_ERROR_MESSAGE" = "Invalid Response received.";
 "GENERIC_ERROR_MESSAGE" = "Something unexpected occured.";
 "CURRENCY_CONVERTER_TITLE" = "Currency Converter";
+"LOADING_MESSAGE" = "Loading ...";
